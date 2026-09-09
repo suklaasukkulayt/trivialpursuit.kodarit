@@ -1,0 +1,57 @@
+body{
+    background-color: #ffb742;
+    margin: 0;
+    color: blue;
+    text-align: center;
+}
+
+h1, h2 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+p{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.game-header{
+    background-color: aqua;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.player-card,
+.turn-panel{
+    background-color: azure;
+    border: 2px dashed greenyellow;
+    border-radius: 0.9rem;
+    padding: 1rem;
+}
+
+.turn-panel{
+    background-color: rgb(196, 226, 226);
+}
+
+.status-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+button {
+    border-radius: 1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: dodgerblue;
+    padding: 0.75rem;
+    border: 3px dashed yellowgreen;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+button:hover{
+    background-color: rgb(77, 145, 218);
+}
+
+button:active{
+    background-color: rgb(48, 106, 163);
+}
