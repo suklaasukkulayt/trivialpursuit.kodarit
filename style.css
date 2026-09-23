@@ -55,3 +55,28 @@ button:hover{
 button:active{
     background-color: rgb(48, 106, 163);
 }
+
+.dice {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 3rem;
+    margin: 0.8rem auto;
+    border: 4px dotted blanchedalmond;
+    border-radius: 8px;
+    background-color: aliceblue;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.player-image {
+    width: 100px;
+    height: 150px;
+}
+
+[data-category="maantieto"] {background-color: #205ea5;}
+[data-category="yleistieto"] {background-color: #d70d7c;}
+[data-category="historia"] {background-color: #e91908;}
+[data-category="kulttuuri"] {background-color: #753ca9;}
+[data-category="tiede"] {background-color: #03923c;}
+[data-category="urheilu"] {background-color: #eb700a;}
