@@ -74,6 +74,20 @@ button:active{
     height: 150px;
 }
 
+.board {
+    display: grid;
+}
+
+.space {
+    position: relative;
+    display: grid;
+    place-items: center;
+    border-radius: 0.75rem;
+    text-align: center;
+    color: rgb(33, 41, 55);
+    background-color: grey;
+}
+
 [data-category="maantieto"] {background-color: #205ea5;}
 [data-category="yleistieto"] {background-color: #d70d7c;}
 [data-category="historia"] {background-color: #e91908;}
