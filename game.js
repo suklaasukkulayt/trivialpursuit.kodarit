@@ -9,9 +9,16 @@ const CATEGORIES = [
 
 const BOARD_SIZE = 18;
 const boardElement = document.querySelector("#board");
+const gameState = {
+    player: {
+        name: "Player", 
+        position:0,
+    }
+};
 
 
 createBoard();
+updateTokens();
 
 function createBoardCoordinates(){
     const coordinates = [];
@@ -21,7 +28,7 @@ function createBoardCoordinates(){
     }
 
     for(let row = 2; row <= 4; row += 1){
-        coordinates.push({row:1, column: 7});
+        coordinates.push({row, column: 7});
     }
 
     for(let column = 6; column >= 1; column -= 1){
@@ -55,4 +62,12 @@ function createBoard(){
         space.textContent = category.name;
         boardElement.append(space);
     }
+}
+
+function updateTokens() {
+    const currentSpace = document.querySelector(`[data-space-index = "${gameState.player.position}"]`);
+    const token = document.createElement("span");
+
+    token.textContent = `${gameState.player.name}`;
+    currentSpace.append(token);
 }

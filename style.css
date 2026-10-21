@@ -76,6 +76,12 @@ button:active{
 
 .board {
     display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(4,70px);
+    gap: 0.45rem;
+    padding: 0.75rem;
+    background-color: lightgoldenrodyellow;
+    border-radius: 8px;
 }
 
 .space {
@@ -86,6 +92,7 @@ button:active{
     text-align: center;
     color: rgb(33, 41, 55);
     background-color: grey;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 [data-category="maantieto"] {background-color: #205ea5;}
