@@ -95,6 +95,25 @@ button:active{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.token {
+    position: absolute;
+    right: 0.3rem;
+    bottom: 0.3rem;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid whitesmoke;
+    color: white;
+    font-size: 0.75rem;
+}
+
+.player-token {
+    background-color: #111827;
+}
+
+
 [data-category="maantieto"] {background-color: #205ea5;}
 [data-category="yleistieto"] {background-color: #d70d7c;}
 [data-category="historia"] {background-color: #e91908;}
