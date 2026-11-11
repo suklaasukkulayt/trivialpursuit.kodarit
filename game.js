@@ -10,7 +10,6 @@ const CATEGORIES = [
 const BOARD_SIZE = 18;
 const boardElement = document.querySelector("#board");
 const diceElement = document.querySelector("#dice")
-const dicerollElement = document.querySelector("#roll-button")
 const gameState = {
     player: {
         name: "Player", 
@@ -19,7 +18,6 @@ const gameState = {
 };
 
 diceElement.addEventListener("click", rollDice);
-dicerollElement.addEventListener("click", rollDice);
 
 
 createBoard();
@@ -68,6 +66,9 @@ function createBoard(){
 }
 
 function updateTokens() {
+    document.querySelectorAll(".token").forEach((token) => {
+        token.remove();
+    });
     const currentSpace = document.querySelector(`[data-space-index = "${gameState.player.position}"]`);
     const token = document.createElement("span");
 
@@ -78,9 +79,21 @@ function updateTokens() {
 }
 
 function rollDice(){
-    console.log("Noppaa heitetty :O")
+    console.log("Rolled dice! :O")
+    const result = Math.floor(Math.random() * 6) + 1;
+    console.log(result);
+    diceElement.textContent = result;
+    movePlayer(result)
 }
 
 function movePlayer(steps){
-    console.log("Ei tehty mitään :D")
+    const player = gameState.player;
+    player.position = (player.position + steps) % BOARD_SIZE;
+    updateTokens();
+    const category = getCategoryAtPosition(player.position);
+    console.log(category)
+}
+
+function getCategoryAtPosition(position){
+    return CATEGORIES[position % CATEGORIES.length];
 }

@@ -62,11 +62,13 @@ button:active{
     width: 4rem;
     height: 3rem;
     margin: 0.8rem auto;
-    border: 4px dotted blanchedalmond;
+    border: 4px dotted rgb(0, 0, 0);
     border-radius: 8px;
     background-color: aliceblue;
     font-size: 2.2rem;
     font-weight: bold;
+    user-select: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .player-image {
