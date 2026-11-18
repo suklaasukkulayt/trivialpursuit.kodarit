@@ -1,10 +1,10 @@
 const CATEGORIES = [
-    {id:"maantieto", name:"Maantieto"},
-    {id:"yleistieto", name:"Yleistieto"},
-    {id:"historia", name:"Historia"},
-    {id:"kulttuuri", name:"Kulttuuri"},
-    {id:"tiede", name:"Tiede"},
-    {id:"urheilu", name:"Urheilu"}
+    {id:"maantieto", name:"Geography"},
+    {id:"yleistieto", name:"General Knowledge"},
+    {id:"historia", name:"History"},
+    {id:"kulttuuri", name:"Culture"},
+    {id:"tiede", name:"Science"},
+    {id:"urheilu", name:"Sports"}
 ]
 
 const BOARD_SIZE = 18;
@@ -14,6 +14,7 @@ const API_URL = "https://oma-trivia-api-0f8ffa1eed2e.herokuapp.com/api/questions
 const boardElement = document.querySelector("#board");
 const diceElement = document.querySelector("#dice");
 const questionText = document.querySelector("#question-text");
+const categoryText = document.querySelector("#category-text");
 const gameState = {
     player: {
         name: "Player", 
@@ -77,34 +78,53 @@ function updateTokens() {
     const token = document.createElement("span");
 
     token.className = "token player-token";
-    //token.textContent = `${gameState.player.name}`;
     token.textContent = "P";
     currentSpace.append(token);
 }
 
-function rollDice(){
-    console.log("Rolled dice! :O")
+async function rollDice(){
+    diceElement.inert = true;
+    console.log("Rolled dice! :O");
     const result = Math.floor(Math.random() * 6) + 1;
     console.log(result);
+
+    for (let roll = 0; roll < 10; roll += 1) {
+        diceElement.textContent = Math.floor(Math.random() * 6) + 1;
+        await new Promise(resolve => setTimeout(resolve, 80));
+    }
+
     diceElement.textContent = result;
-    movePlayer(result)
+    await new Promise(resolve => setTimeout(resolve, 300));
+    await movePlayer(result);
 }
 
 async function movePlayer(steps){
+    diceElement.inert = true;
+    questionText.textContent = "Generating question..."
     const player = gameState.player;
-    player.position = (player.position + steps) % BOARD_SIZE;
-    updateTokens();
-    const category = getCategoryAtPosition(player.position);
-    console.log(category)
+    let category;
+
+    for (let stepsMoved = 0; stepsMoved < steps; stepsMoved += 1) {
+        player.position = (player.position + 1) % BOARD_SIZE;
+        updateTokens();
+        category = getCategoryAtPosition(player.position);
+        console.log(category);
+        categoryText.textContent = category.name;
+
+        await new Promise(resolve => setTimeout(resolve, 300));
+    }
 
     const question = await fetchQuestion(category.id);
     console.log(question);
     questionText.textContent = question.question;
+    diceElement.inert = false;
 }
 
 function getCategoryAtPosition(position){
     return CATEGORIES[position % CATEGORIES.length];
 }
+
+const difficultySelect = document.getElementById("difficulty");
 
 async function fetchQuestion(category) {
     const response = await fetch(API_URL,{
@@ -114,7 +134,7 @@ async function fetchQuestion(category) {
         },
         body: JSON.stringify({
             category: category,
-            difficulty: "helppo",
+            difficulty: difficultySelect.value,
             ageGroup: "10-12",
             count: 1,
             language: "englanti"
@@ -122,6 +142,8 @@ async function fetchQuestion(category) {
     });
 
     if(!response.ok){
+        questionText.textContent = `Question search failed with error: ${response.status}`;
+        diceElement.inert = false;
         throw new Error(
             `Question search failed with error: (${response.status})`
         );

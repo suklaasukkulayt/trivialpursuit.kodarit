@@ -11,19 +11,27 @@
 
     <header class="game-header">
         <h1>Trivial Pursuit</h1>
-    <p>Kerää kaikki kuusi aihealuetta</p>
+    <p>Collect all six categories</p>
+
+    <label for="difficulty">Difficulty:</label>
+    <select name="difficulty" id="difficulty">
+        <option value="helppo">Easy</option>
+        <option value="keskitaso">Normal</option>
+        <option value="vaikea">Hard</option>
+    </select>
     </header>
     
     <section class="status-panel">
         <article class="player-card">
-            <h2>Pelaaja</h2>
+            <h2>Player</h2>
             <img src="./graphics/player.png" class="player-image">
             <p>Kerätyt aihealueet: 0/6</p>
 
             <section class="question-panel">
-            <p>Aihealue</p>
-            <h2>Kysymys</h2>
-            <p id="question-text"></p>
+            <h2>Category:</h2>
+            <p id="category-text">Roll the dice!</p>
+            <h2>Question:</h2>
+            <p id="question-text">Roll the dice!</p>
             </section>
         </article>
 
