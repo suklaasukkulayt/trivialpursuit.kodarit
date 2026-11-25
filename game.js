@@ -1,8 +1,8 @@
 const CATEGORIES = [
     {id:"maantieto", name:"Geography"},
-    {id:"yleistieto", name:"General Knowledge"},
+    {id:"yleistieto", name:"General knowledge"},
     {id:"historia", name:"History"},
-    {id:"kulttuuri", name:"Culture"},
+    {id:"taide ja kulttuuri", name:"Art and culture"},
     {id:"tiede", name:"Science"},
     {id:"urheilu", name:"Sports"}
 ]
@@ -15,9 +15,10 @@ const boardElement = document.querySelector("#board");
 const diceElement = document.querySelector("#dice");
 const questionText = document.querySelector("#question-text");
 const categoryText = document.querySelector("#category-text");
+const answersElement = document.querySelector("#answers");
 const gameState = {
     player: {
-        name: "Player", 
+        name: "Player",
         position:0,
     }
 };
@@ -102,7 +103,7 @@ async function movePlayer(steps){
     diceElement.inert = true;
     questionText.textContent = "Generating question..."
     const player = gameState.player;
-    let category;
+    let category = getCategoryAtPosition(player.position);;
 
     for (let stepsMoved = 0; stepsMoved < steps; stepsMoved += 1) {
         player.position = (player.position + 1) % BOARD_SIZE;
@@ -114,10 +115,26 @@ async function movePlayer(steps){
         await new Promise(resolve => setTimeout(resolve, 300));
     }
 
-    const question = await fetchQuestion(category.id);
-    console.log(question);
-    questionText.textContent = question.question;
+    try {
+        const question = await fetchQuestion(category.id);
+        console.log(question);
+        showQuestion(question, category);
+        
+    } catch(error) {
+        console.log(error);
+        questionText.textContent = "ABORT MISSION: " + error + " (Question load failed!)";
+    }
     diceElement.inert = false;
+}
+
+function showQuestion(question, category){
+    questionText.textContent = question.question;
+
+    question.answers.forEach((answer, index)=>{
+        const button = document.createElement("button");
+        answersElement.append(button);
+        button.textContent = answer;
+    });
 }
 
 function getCategoryAtPosition(position){
